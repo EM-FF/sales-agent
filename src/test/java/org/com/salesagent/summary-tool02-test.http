@@ -1,0 +1,29 @@
+### 查询 Top 3 销售员（宽范围覆盖全部测试数据）
+POST http://localhost:8087/test/tool/top-reps
+Content-Type: application/json
+
+{
+  "startDate": "2025-01-01",
+  "endDate": "2026-12-30",
+  "regionName": null,
+  "topN": 3
+}
+
+### 查询各大区排名
+POST http://localhost:8087/test/tool/top-regions
+Content-Type: application/json
+
+{
+  "startDate": "2025-01-01",
+  "endDate": "2026-12-30"
+}
+
+### 查最畅销 Top 5 产品
+POST http://localhost:8087/test/tool/top-products
+Content-Type: application/json
+
+{
+  "startDate": "2025-01-01",
+  "endDate": "2026-12-30",
+  "topN": 5
+}

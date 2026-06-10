@@ -1,0 +1,23 @@
+### 查询华东区11月所有订单
+POST http://localhost:8087/test/tool/query-orders
+Content-Type: application/json
+
+{
+  "startDate": "2025-11-01",
+  "endDate": "2025-11-30",
+  "regionName": "华东区",
+  "repName": null,
+  "limit": 20
+}
+
+###查询特定销售员（张磊）的订单
+POST http://localhost:8087/test/tool/query-orders
+Content-Type: application/json
+
+{
+"startDate": "2025-08-01",
+"endDate": "2026-03-30",
+"regionName": "华东区",
+"repName": "张磊",
+"limit": 20
+}
