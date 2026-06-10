@@ -1,0 +1,30 @@
+### 环比：最近两个等长周期对比（prevStart/prevEnd 传 null，自动计算上期）
+POST http://localhost:8087/test/tool/month-over-month
+Content-Type: application/json
+
+{
+"currentStart": "2026-04-01",
+"currentEnd": "2026-04-30",
+"prevStart": null,
+"prevEnd": null,
+"regionName": null
+}
+
+### 同比：今年 vs 去年同期（全公司）
+POST http://localhost:8087/test/tool/year-over-year
+Content-Type: application/json
+
+{
+  "startDate": "2026-03-01",
+  "endDate": "2026-04-30",
+  "regionName": null
+}
+
+### 近7个月月度趋势（覆盖全部测试数据）
+POST http://localhost:8087/test/tool/monthly-trend
+Content-Type: application/json
+
+{
+  "months": 7,
+  "regionName": "华东区"
+}

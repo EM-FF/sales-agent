@@ -66,7 +66,7 @@ public class SalesQueryService {
         // 所有地区销售总额
         return orderRepository.findAll().stream()
                 .filter(o -> o.getStatus().equals("COMPLETED"))
-                .filter(o -> o.getOrderDate().isBefore(start) && o.getOrderDate().isAfter(end))
+                .filter(o -> !o.getOrderDate().isBefore(start) && !o.getOrderDate().isAfter(end))
                 .map(SalesOrder::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
@@ -166,8 +166,8 @@ public class SalesQueryService {
 
         return raw.stream().map(row -> new MonthlyTrendDTO(
                 row[0].toString(),
-                (BigDecimal) row[1],
-                (Integer) row[2]
+                new BigDecimal(row[1].toString()) ,
+                ((Number)row[2]).intValue()
         )).collect(Collectors.toList());
     }
 
