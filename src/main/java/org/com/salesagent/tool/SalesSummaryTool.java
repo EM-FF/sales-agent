@@ -186,7 +186,7 @@ public class SalesSummaryTool {
 
             BigDecimal totalAmount = queryService.queryTotalAmount(regionId, start, end);
 
-            return String.format("销售额汇总(%s 至 %s%s)：\n总销售额:￥,.%0f",
+            return String.format("销售额汇总(%s 至 %s%s)：\n总销售额:￥%,.0f",
                     startDate, endDate,
                     regionName != null && !regionName.isBlank() ? "，" + regionName : " "
                     , totalAmount.doubleValue());

@@ -3,8 +3,10 @@ package org.com.salesagent.agent;
 import dev.langchain4j.memory.ChatMemory;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.chat.ChatModel;
+import dev.langchain4j.model.chat.StreamingChatModel;
 import dev.langchain4j.service.AiServices;
 import lombok.RequiredArgsConstructor;
+import org.com.salesagent.memory.MysqlChatMemoryStore;
 import org.com.salesagent.tool.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,23 +18,30 @@ import java.util.function.Function;
 public class SalesAgentConfig {
 
     private final ChatModel chatLanguageModel;
+    private final StreamingChatModel streamingChatModel; // 注入流式模型
     private final SalesQueryTool salesQueryTool;
     private final SalesSummaryTool salesSummaryTool;
     private final SalesTrendTool salesTrendTool;
     private final ChartGeneratorTool chartGeneratorTool;
     private final AnomalyDetectionTool anomalyDetectionTool;
+    private final MysqlChatMemoryStore chatMemoryStore;   // 注入持久化存储
 
     @Bean
     public SalesAgent salesAgent() {
         return AiServices.builder(SalesAgent.class)
                 .chatModel(chatLanguageModel)
+                .streamingChatModel(streamingChatModel)
                 .tools(salesQueryTool,
                         salesSummaryTool,
                         salesTrendTool,
                         chartGeneratorTool,
                         anomalyDetectionTool)
                 .chatMemoryProvider(memoryId ->
-                        MessageWindowChatMemory.withMaxMessages(20))
+                        MessageWindowChatMemory.builder()
+                                .id(memoryId)
+                                .maxMessages(20)
+                                .chatMemoryStore(chatMemoryStore)
+                                .build())
                 .build();
     }
 }

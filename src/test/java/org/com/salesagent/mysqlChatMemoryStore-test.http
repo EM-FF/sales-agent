@@ -1,0 +1,17 @@
+### 第一轮
+POST http://localhost:8087/agent/chat
+Content-Type: application/json
+
+{"sessionId":"test-001","message":"上个月华东区销售额是多少？"}
+
+### 第二轮（追问，Agent 应该记得上一问的上下文）
+POST http://localhost:8087/agent/chat
+Content-Type: application/json
+
+{"sessionId":"test-001","message":"按产品品类拆分一下"}
+
+### 重启服务后再发（记忆应该还在，因为存 MySQL 了）
+POST http://localhost:8087/agent/chat
+Content-Type: application/json
+
+{"sessionId":"test-001","message":"刚才我们聊了什么？"}

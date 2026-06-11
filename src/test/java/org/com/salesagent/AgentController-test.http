@@ -1,0 +1,88 @@
+# curl -X POST "http://localhost:8080/agent/chat"
+#  -H "Content-Type: application/json"
+#  -d '{"sessionId":"e2e-001","message":"你好，你能帮我做什么？"}'
+POST http://localhost:8087/agent/chat
+Content-Type: application/json
+
+{
+  "sessionId": "e2e-001",
+  "message": "你好，你能帮我做什么？"
+}
+
+###
+
+# curl -X POST "http://localhost:8080/agent/chat"
+#  -H "Content-Type: application/json"
+#  -d '{"sessionId":"e2e-001","message":"本季度（10月到12月）Top 3 销售员是谁？"}'
+POST http://localhost:8087/agent/chat
+Content-Type: application/json
+
+{
+  "sessionId": "e2e-001",
+  "message": "本季度（4月到6月）Top 3 销售员是谁？"
+}
+
+###
+# curl -X POST "http://localhost:8080/agent/chat"
+#  -H "Content-Type: application/json"
+#  -d '{"sessionId":"e2e-001","message":"华东区11月销售额比10月增长还是下降了？"}'
+POST http://localhost:8087/agent/chat
+Content-Type: application/json
+
+{
+  "sessionId": "e2e-001",
+  "message": "华东区5月销售额比4月增长还是下降了？"
+}
+
+###
+# 第一轮
+POST http://localhost:8087/agent/chat
+Content-Type: application/json
+
+{"sessionId":"e2e-002","message":"查一下华东区上个月的销售数据"}
+
+###
+# 第二轮（追问，不重复提大区和时间）
+POST http://localhost:8087/agent/chat
+Content-Type: application/json
+
+{"sessionId":"e2e-002","message":"按产品品类再拆一下"}
+
+###
+# curl -X POST "http://localhost:8080/agent/chat"
+#  -H "Content-Type: application/json"
+#  -d '{"sessionId":"e2e-003","message":"最近数据有没有异常需要关注？"}'
+POST http://localhost:8087/agent/chat
+Content-Type: application/json
+
+{
+  "sessionId": "e2e-003",
+  "message": "最近数据有没有异常需要关注？"
+}
+
+###
+# curl -X POST "http://localhost:8080/agent/chat"
+#  -H "Content-Type: application/json"
+#  -d '{"sessionId":"e2e-004","message":"帮我把张磊的11月销售额改成100万"}'
+POST http://localhost:8087/agent/chat
+Content-Type: application/json
+
+{
+  "sessionId": "e2e-004",
+  "message": "帮我把张磊的11月销售额改成100万"
+}
+
+###
+
+
+
+
+
+
+
+
+
+
+
+
+

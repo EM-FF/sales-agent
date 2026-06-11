@@ -87,7 +87,7 @@ sales-agent:
 logging:
   level:
     com.jichi.salesAgent: DEBUG
-    dev.langchain4j: INFO
+    dev.langchain4j: DEBUG
 app:
   auth:
     enabled: false
