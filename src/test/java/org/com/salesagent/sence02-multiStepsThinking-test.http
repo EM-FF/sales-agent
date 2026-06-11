@@ -1,0 +1,5 @@
+### 多步推理
+POST http://localhost:8087/agent/chat
+Content-Type: application/json
+
+{"sessionId":"scenario-002","message":"哪个销售员本季度掉量最大，你判断一下可能的原因"}

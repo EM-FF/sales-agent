@@ -1,0 +1,11 @@
+### 第一轮
+POST http://localhost:8087/agent/chat
+Content-Type: application/json
+
+{"sessionId":"scenario-001","message":"上个月华东区的销售情况怎么样？"}
+
+### 第二轮（sessionId 必须和第一轮一样，Agent 才能记住上下文）
+POST http://localhost:8087/agent/chat
+Content-Type: application/json
+
+{"sessionId":"scenario-001","message":"张伟和王芳各做了多少？"}

@@ -1,0 +1,24 @@
+### 折线图 + 饼图（同一个 session，两轮对话）
+POST http://localhost:8087/agent/chat
+Content-Type: application/json
+
+{"sessionId":"scenario-003","message":"给我画一张近6个月全公司的销售趋势折线图"}
+
+### 第二轮：继续追问饼图（sessionId 保持一致）
+POST http://localhost:8087/agent/chat
+Content-Type: application/json
+
+{"sessionId":"scenario-003","message":"再给我一个各大区近7个月销售占比的饼图"}
+
+### 场景 B：主动预警
+POST http://localhost:8087/agent/chat
+Content-Type: application/json
+
+{"sessionId":"scenario-003b","message":"最近数据有没有什么异常需要我关注？"}
+
+### 场景 B 追问：预警 + 趋势联动
+# 接着上面的 session 追问
+POST http://localhost:8087/agent/chat
+Content-Type: application/json
+
+{"sessionId":"scenario-003b","message":"华北区那个问题，再帮我查一下华北区近3个月的月度趋势"}
