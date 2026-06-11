@@ -1,0 +1,25 @@
+### 折线图：华东区近7个月销售趋势
+POST http://localhost:8087/test/tool/line-chart
+Content-Type: application/json
+
+{"months": 7, "regionName": "华东区", "title": "华东区近7个月销售趋势"}
+
+### 柱状图：各大区销售额对比（宽范围覆盖全部测试数据）
+POST http://localhost:8087/test/tool/bar-chart
+Content-Type: application/json
+
+{"dimension": "region", "startDate": "2025-01-01", "endDate": "2027-12-31", "title": "各大区销售额对比"}
+
+### 柱状图：Top 10 销售员对比
+POST http://localhost:8087/test/tool/bar-chart
+Content-Type: application/json
+
+{"dimension": "rep", "startDate": "2025-01-01", "endDate": "2027-12-31", "title": "销售员业绩排名"}
+
+### 饼图：各大区销售占比
+POST http://localhost:8087/test/tool/pie-chart
+Content-Type: application/json
+
+{"dimension": "region", "startDate": "2025-01-01", "endDate": "2027-12-31", "title": "各大区销售占比"}
+
+

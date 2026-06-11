@@ -77,7 +77,7 @@ public class SalesQueryService {
     /**
      * 销售员业绩排名（带姓名、大区信息）
      */
-    public List<RepSalesDTO> queryRepRank(LocalDate start, LocalDate end, int topN) {
+    public List<RepSalesDTO> queryRepRanking(LocalDate start, LocalDate end, int topN) {
         // 批量查询所有销售的数据，避免每次查一个用户，查询n次
         List<Object[]> raw = orderRepository.findRepRanking(start, end);
 
@@ -108,7 +108,7 @@ public class SalesQueryService {
     /**
      * 大区业绩排名
      */
-    public List<RegionSalesDTO> queryRegionRank(LocalDate start, LocalDate end) {
+    public List<RegionSalesDTO> queryRegionRanking(LocalDate start, LocalDate end) {
         // 返回regionId和 地区销售总额total
         List<Object[]> raw = orderRepository.findRegionRanking(start, end);
 
@@ -127,7 +127,7 @@ public class SalesQueryService {
     /**
      * 产品销售排名
      */
-    public List<ProductSalesDTO> queryProductRank(LocalDate start, LocalDate end, int topN) {
+    public List<ProductSalesDTO> queryProductRanking(LocalDate start, LocalDate end, int topN) {
         // 查询结果[productId, total, quantity] 产品id，产品总销售额 库存
         List<Object[]> productRanking = orderRepository.findProductRanking(start, end);
 

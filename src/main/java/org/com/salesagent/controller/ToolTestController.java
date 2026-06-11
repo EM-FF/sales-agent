@@ -1,9 +1,7 @@
 package org.com.salesagent.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.com.salesagent.tool.SalesQueryTool;
-import org.com.salesagent.tool.SalesSummaryTool;
-import org.com.salesagent.tool.SalesTrendTool;
+import org.com.salesagent.tool.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,13 +13,19 @@ public class ToolTestController {
     private final SalesQueryTool salesQueryTool;
     private final SalesSummaryTool salesSummaryTool;
     private final SalesTrendTool salesTrendTool;
+    private final ChartGeneratorTool chartGeneratorTool;
+    private final AnomalyDetectionTool anomalyDetectionTool;
 
     public ToolTestController(SalesQueryTool salesQueryTool,
                               SalesSummaryTool salesSummaryTool,
-                              SalesTrendTool salesTrendTool) {
+                              SalesTrendTool salesTrendTool,
+                              ChartGeneratorTool chartGeneratorTool,
+                              AnomalyDetectionTool anomalyDetectionTool) {
         this.salesQueryTool = salesQueryTool;
         this.salesSummaryTool = salesSummaryTool;
         this.salesTrendTool = salesTrendTool;
+        this.chartGeneratorTool = chartGeneratorTool;
+        this.anomalyDetectionTool = anomalyDetectionTool;
     }
 
     record QueryRequest(String startDate, String endDate,
@@ -80,6 +84,32 @@ public class ToolTestController {
         return salesTrendTool.getMonthlyTrend(req.months(), req.regionName());
     }
 
+    // -------- 工具四 --------
+    record LineChartRequest(int months, String regionName, String title) {}
+    record BarChartRequest(String dimension, String startDate, String endDate, String title) {}
+    record PieChartRequest(String dimension, String startDate, String endDate, String title) {}
+
+    @PostMapping("/line-chart")
+    public String lineChart(@RequestBody LineChartRequest req) {
+        return chartGeneratorTool.generateLineChart(req.months(), req.regionName(), req.title());
+    }
+
+    @PostMapping("/bar-chart")
+    public String barChart(@RequestBody BarChartRequest req) {
+        return chartGeneratorTool.generateBarChart(
+                req.dimension(), req.startDate(), req.endDate(), req.title());
+    }
+
+    @PostMapping("/pie-chart")
+    public String pieChart(@RequestBody PieChartRequest req) {
+        return chartGeneratorTool.generatePieChart(
+                req.dimension(), req.startDate(), req.endDate(), req.title());
+    }
+    // -------- 工具五 --------
+    @PostMapping("/detect-anomalies")
+    public String detectAnomalies() {
+        return anomalyDetectionTool.detectAllAnomalies();
+    }
 
 
 }

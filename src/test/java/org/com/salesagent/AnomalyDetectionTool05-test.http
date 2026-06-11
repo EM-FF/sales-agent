@@ -1,0 +1,6 @@
+POST http://localhost:8087/test/tool/detect-anomalies
+Content-Type: application/json
+
+{}
+
+

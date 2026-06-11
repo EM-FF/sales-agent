@@ -42,7 +42,7 @@ public class SalesSummaryTool {
             LocalDate end = LocalDate.parse(endDate);
             int n = Math.min(Math.max(topN, 1), 20);
 
-            List<RepSalesDTO> reps = queryService.queryRepRank(start, end, n);
+            List<RepSalesDTO> reps = queryService.queryRepRanking(start, end, n);
             if (reps.isEmpty()) {
                 return "该时段暂时没有销售数据";
             }
@@ -80,7 +80,7 @@ public class SalesSummaryTool {
             LocalDate start = LocalDate.parse(startDate);
             LocalDate end = LocalDate.parse(endDate);
 
-            List<RegionSalesDTO> regions = queryService.queryRegionRank(start, end);
+            List<RegionSalesDTO> regions = queryService.queryRegionRanking(start, end);
             if (regions.isEmpty()) {
                 return "该时段暂无数据";
             }
@@ -126,7 +126,7 @@ public class SalesSummaryTool {
             boolean isWorst = topN < 0;
             int n = Math.min(Math.abs(topN), 20);
 
-            List<ProductSalesDTO> products = queryService.queryProductRank(start, end, n);
+            List<ProductSalesDTO> products = queryService.queryProductRanking(start, end, n);
             if (products.isEmpty()) {
                 return "该时段暂时没有该产品销售数据";
             }
